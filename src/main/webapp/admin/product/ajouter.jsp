@@ -22,6 +22,9 @@
     <label for="qte">Quantity:</label>
     <input type="number" name="qte" id="qte" required/>
 
+    <label for="prix">Prix:</label>
+    <input type="number" name="prix" id="prix" required/>
+
     <input type="submit" name="ajoutBtn" value="Ajouter">
 
 </form>

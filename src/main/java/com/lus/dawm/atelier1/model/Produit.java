@@ -8,17 +8,19 @@ public class Produit implements Serializable {
     private String designation;
     private String description;
     private int qte;
+
+    private Double prix;
     private Categorie categorie;
     private LigneCommande ligneCommande;
 
-    public Produit(Long id, String designation, String description, int qte, Categorie categorie, LigneCommande ligneCommande) {
+    public Produit(Long id, String designation, String description, int qte, Double prix, Categorie categorie, LigneCommande ligneCommande) {
         this.id = id;
         this.designation = designation;
         this.description = description;
         this.qte = qte;
+        this.prix = prix;
         this.categorie = categorie;
         this.ligneCommande = ligneCommande;
-
     }
 
     public Produit() {
@@ -54,6 +56,14 @@ public class Produit implements Serializable {
 
     public void setQte(int qte) {
         this.qte = qte;
+    }
+
+    public Double getPrix() {
+        return prix;
+    }
+
+    public void setPrix(Double prix) {
+        this.prix = prix;
     }
 
     public Categorie getCategorie() {

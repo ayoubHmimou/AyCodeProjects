@@ -20,12 +20,13 @@ public class AjouterProduit extends HttpServlet {
             String designation = req.getParameter("designation");
             String description = req.getParameter("description");
             int qte = Integer.parseInt(req.getParameter("qte"));
+            double prix = Double.parseDouble(req.getParameter("prix"));
 
-            Produit produit = new Produit(id, designation, description, qte, null, null);
+            Produit produit = new Produit(id, designation, description, qte, prix ,null, null);
             DB.addProduits(req ,produit);
 
             resp.sendRedirect("admin/product/lister.jsp");
-        }catch (NumberFormatException | NullPointerException e){
+        }catch (NumberFormatException | NullPointerException ignored){
 
         }
     }

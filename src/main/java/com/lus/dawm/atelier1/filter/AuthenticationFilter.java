@@ -25,7 +25,7 @@ public class AuthenticationFilter implements Filter {
         boolean isLoggedIn = httpServletRequest.getSession().getAttribute("userLoggedIn") != null;
 
         if(isLoggedIn){
-            String role = (String) httpServletRequest.getSession().getAttribute("userRole");
+            String role = (String) httpServletRequest.getSession().getAttribute("role");
             boolean isAdmin = "admin".equals(role);
             if(isAdmin){
                 chain.doFilter(request, response);

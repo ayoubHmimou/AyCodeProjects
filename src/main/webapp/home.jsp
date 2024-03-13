@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<h1>Welcome to our E-Shop</h1>
+<h1>Welcome to our E-Shop</h1><p><%=request.getSession().getAttribute("role")%> </p>
 <a href="admin/product/ajouter.jsp"> ajouter produits</a>
 
 </body>
