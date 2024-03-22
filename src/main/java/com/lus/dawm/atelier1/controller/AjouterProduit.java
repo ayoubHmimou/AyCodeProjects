@@ -16,13 +16,12 @@ public class AjouterProduit extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            Long id = Long.valueOf(req.getParameter("produitId"));
             String designation = req.getParameter("designation");
             String description = req.getParameter("description");
             int qte = Integer.parseInt(req.getParameter("qte"));
             double prix = Double.parseDouble(req.getParameter("prix"));
 
-            Produit produit = new Produit(id, designation, description, qte, prix ,null, null);
+            Produit produit = new Produit(designation, description, qte, prix);
             DB.addProduits(req ,produit);
 
             resp.sendRedirect("admin/product/lister.jsp");

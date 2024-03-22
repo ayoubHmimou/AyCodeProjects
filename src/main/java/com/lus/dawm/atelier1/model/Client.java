@@ -1,17 +1,25 @@
 package com.lus.dawm.atelier1.model;
 
-import java.io.Serializable;
-import java.util.Date;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 
-public class Client extends Utilisateur {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+@Entity
+public class Client extends Utilisateur implements Serializable{
 
     private Date dateNaissance;
     private String adresse;
+    @OneToMany(mappedBy = "client")
+    private List<Commande> commandes = new ArrayList<>();
 
-
-    public Client(Date dateNaissance, String adresse) {
+    public Client(Date dateNaissance, String adresse, List<Commande> commandes) {
         this.dateNaissance = dateNaissance;
         this.adresse = adresse;
+        this.commandes = commandes;
     }
 
     public Client(){
@@ -34,5 +42,11 @@ public class Client extends Utilisateur {
         this.adresse = adresse;
     }
 
+    public List<Commande> getCommandes() {
+        return commandes;
+    }
 
+    public void setCommandes(List<Commande> commandes) {
+        this.commandes = commandes;
+    }
 }

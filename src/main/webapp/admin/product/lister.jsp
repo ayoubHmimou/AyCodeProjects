@@ -6,12 +6,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%
-    ProduitService produitService = null;
-    List<Produit> produits = new ArrayList<>();
+    ProduitService produitService;
+    List<Produit> produits;
+    String categorieId = request.getParameter("categorieId");
 
     try {
         produitService = new ProduitService();
-        produits = produitService.getAllProduits();
+
+        if(categorieId != null && !categorieId.isEmpty()){
+            produits = produitService.getProduitsByCategorieId(Integer.parseInt(categorieId));
+        }else{
+            produits = produitService.getAllProduits();
+        }
     } catch (SQLException | ClassNotFoundException e) {
         throw new RuntimeException(e);
     }

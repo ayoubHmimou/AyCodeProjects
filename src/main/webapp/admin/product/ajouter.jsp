@@ -10,9 +10,6 @@
 
 <form action="${pageContext.request.contextPath}/ajouterProduit" method="post" class="product-form">
 
-    <label for="produitId">Product ID:</label>
-    <input type="number" name="produitId" id="produitId" required/>
-
     <label for="designation">Designation:</label>
     <input type="text" name="designation" id="designation" required/>
 

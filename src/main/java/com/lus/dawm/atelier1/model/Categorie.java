@@ -1,21 +1,37 @@
 package com.lus.dawm.atelier1.model;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+@Entity
 public class Categorie implements Serializable {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String designation;
     private String description;
-    private Produit produit;
-    private Categorie categorie;
+    @ManyToMany(mappedBy = "categories")
+    @JoinTable
+            (
+                    name = "categorie_produit",
+                    joinColumns = @JoinColumn(name = "categorie_id"),
+                    inverseJoinColumns = @JoinColumn(name = "produit_id")
+            )
+    private List<Produit> produits = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "parent_categorie_id")
+    Categorie parentCategorie;
+    @OneToMany(mappedBy = "parentCategorie")
+    private List<Categorie> subCategories = new ArrayList<>();
 
-    public Categorie(Long id, String designation, String description, Produit produit, Categorie categorie) {
+    public Categorie(Long id, String designation, String description, Categorie parentCategorie) {
         this.id = id;
         this.designation = designation;
         this.description = description;
-        this.produit = produit;
-        this.categorie = categorie;
+        this.parentCategorie = parentCategorie;
     }
 
     public Categorie() {
@@ -45,12 +61,27 @@ public class Categorie implements Serializable {
         this.description = description;
     }
 
-    public Produit getProduit() {
-        return produit;
+    public List<Produit> getProduits() {
+        return produits;
     }
 
-    public Categorie getCategorie() {
-        return categorie;
+    public void setProduits(List<Produit> produits) {
+        this.produits = produits;
     }
 
+    public Categorie getParentCategorie() {
+        return parentCategorie;
+    }
+
+    public void setParentCategorie(Categorie parentCategorie) {
+        this.parentCategorie = parentCategorie;
+    }
+
+    public List<Categorie> getSubCategories() {
+        return subCategories;
+    }
+
+    public void setSubCategories(List<Categorie> subCategories) {
+        this.subCategories = subCategories;
+    }
 }

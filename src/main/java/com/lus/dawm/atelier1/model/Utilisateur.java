@@ -1,9 +1,17 @@
 package com.lus.dawm.atelier1.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.io.Serializable;
 
+@Entity
 public class Utilisateur implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String email;
     private String password;
@@ -11,8 +19,7 @@ public class Utilisateur implements Serializable {
     private String prenom;
     private String role;
 
-    public Utilisateur(Long id, String email, String password, String nom, String prenom, String role) {
-        this.id = id;
+    public Utilisateur(String email, String password, String nom, String prenom, String role) {
         this.email = email;
         this.password = password;
         this.nom = nom;

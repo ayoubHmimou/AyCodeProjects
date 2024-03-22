@@ -27,8 +27,8 @@ public class UserService {
                 user.setId(rs.getLong("id"));
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
-                user.setNom(rs.getString("lastname"));
-                user.setPrenom(rs.getString("firstname"));
+                user.setNom(rs.getString("nom"));
+                user.setPrenom(rs.getString("prenom"));
                 user.setRole(rs.getString("role"));
             }
         }catch(SQLSyntaxErrorException | NumberFormatException e){

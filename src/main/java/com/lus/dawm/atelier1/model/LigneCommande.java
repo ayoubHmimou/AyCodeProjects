@@ -1,20 +1,24 @@
 package com.lus.dawm.atelier1.model;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
-
+@Entity
 public class LigneCommande implements Serializable {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private Double prix;
     private int qte;
+    @ManyToOne
     private Commande commande;
-    private Panier panier;
+    @ManyToOne
     private Produit produit;
 
-    public LigneCommande(Double prix, int qte, Commande commande, Panier panier, Produit produit) {
+    public LigneCommande(Double prix, int qte, Commande commande, Produit produit) {
         this.prix = prix;
         this.qte = qte;
         this.commande = commande;
-        this.panier = panier;
         this.produit = produit;
     }
 
@@ -43,14 +47,6 @@ public class LigneCommande implements Serializable {
 
     public void setCommande(Commande commande) {
         this.commande = commande;
-    }
-
-    public Panier getPanier() {
-        return panier;
-    }
-
-    public void setPanier(Panier panier) {
-        this.panier = panier;
     }
 
     public Produit getProduit() {

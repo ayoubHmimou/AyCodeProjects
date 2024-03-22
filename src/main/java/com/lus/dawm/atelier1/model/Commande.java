@@ -1,21 +1,33 @@
 package com.lus.dawm.atelier1.model;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+@Entity
 public class Commande implements Serializable {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private LocalDateTime dateCreation;
     private Date dateLivraison;
     private String adresseLivraison;
+    @ManyToOne
+    private Client client;
+    @OneToMany(mappedBy = "commande")
+    private List<LigneCommande> ligneCommandes = new ArrayList<>();
 
-    public Commande(Long id, LocalDateTime dateCreation, Date dateLivraison, String adresseLivraison) {
-        this.id = id;
+
+
+    public Commande(LocalDateTime dateCreation, Date dateLivraison, String adresseLivraison, Client client) {
         this.dateCreation = dateCreation;
         this.dateLivraison = dateLivraison;
         this.adresseLivraison = adresseLivraison;
+        this.client = client;
     }
 
     public Commande() {
@@ -49,8 +61,15 @@ public class Commande implements Serializable {
         return adresseLivraison;
     }
 
-    public void setAdresseLivraison(Client client ) {
-        this.adresseLivraison = client.getAdresse();
+    public void setAdresseLivraison(String adresseLivraison) {
+        this.adresseLivraison = adresseLivraison;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
 }

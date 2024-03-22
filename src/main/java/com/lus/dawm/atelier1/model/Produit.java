@@ -1,26 +1,30 @@
 package com.lus.dawm.atelier1.model;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+@Entity
 public class Produit implements Serializable {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String designation;
     private String description;
     private int qte;
-
     private Double prix;
-    private Categorie categorie;
-    private LigneCommande ligneCommande;
+    @ManyToMany(mappedBy = "produits")
+    private List<Categorie> categories = new ArrayList<>();
+    @OneToMany(mappedBy = "produit")
+    private List<LigneCommande> ligneCommandes = new ArrayList<>();
 
-    public Produit(Long id, String designation, String description, int qte, Double prix, Categorie categorie, LigneCommande ligneCommande) {
-        this.id = id;
+    public Produit(String designation, String description, int qte, Double prix) {
         this.designation = designation;
         this.description = description;
         this.qte = qte;
         this.prix = prix;
-        this.categorie = categorie;
-        this.ligneCommande = ligneCommande;
     }
 
     public Produit() {
@@ -66,19 +70,19 @@ public class Produit implements Serializable {
         this.prix = prix;
     }
 
-    public Categorie getCategorie() {
-        return categorie;
+    public List<Categorie> getCategories() {
+        return categories;
     }
 
-    public void setCategorie(Categorie categorie) {
-        this.categorie = categorie;
+    public void setCategories(List<Categorie> categories) {
+        this.categories = categories;
     }
 
-    public LigneCommande getLigneCommande() {
-        return ligneCommande;
+    public List<LigneCommande> getLigneCommandes() {
+        return ligneCommandes;
     }
 
-    public void setLigneCommande(LigneCommande ligneCommande) {
-        this.ligneCommande = ligneCommande;
+    public void setLigneCommandes(List<LigneCommande> ligneCommandes) {
+        this.ligneCommandes = ligneCommandes;
     }
 }
